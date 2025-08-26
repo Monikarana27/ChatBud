@@ -566,9 +566,9 @@ We welcome contributions from the community! Here's how you can help:
 
 ### Maintainer
 **Monika Rana**
-- Email: monikarana27@gmail.com
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [@yourusername]
+- Email: monikarana5724@gmail.com
+- LinkedIn: https://www.linkedin.com/in/monika-rana-9614b51b8/
+- GitHub: https://github.com/Monikarana27
 
 ### Acknowledgments
 - Socket.IO team for excellent real-time capabilities
