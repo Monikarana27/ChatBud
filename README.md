@@ -27,7 +27,7 @@
 
 ## 🎯 Project Overview
 
-XeroxChat is a production-ready, real-time chat application that demonstrates modern web development practices and enterprise-level architecture. Built to handle concurrent users with persistent message storage and advanced features like message search, user management, and room-based conversations.
+ChatBud is a production-ready, real-time chat application that demonstrates modern web development practices and enterprise-level architecture. Built to handle concurrent users with persistent message storage and advanced features like message search, user management, and room-based conversations.
 
 ### Problem Statement
 Traditional messaging applications often lack proper persistence, scalability, and real-time features. This project addresses these challenges by implementing:
