@@ -22,27 +22,33 @@ const io = socketIo(server, {
    }
 });
 
+// IMPORTANT: Trust proxy for Railway deployment
+app.set('trust proxy', true);
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rate limiting
+// Rate limiting with proxy trust
 const limiter = rateLimit({
    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
-   message: 'Too many requests from this IP, please try again later.'
+   message: 'Too many requests from this IP, please try again later.',
+   trustProxy: true // Add this for Railway
 });
 app.use(limiter);
 
-// Session configuration
+// Session configuration with better Railway settings
 app.use(session({
    secret: process.env.SESSION_SECRET || 'your-secret-key',
    resave: false,
    saveUninitialized: false,
    cookie: { 
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      httpOnly: true, // Add for security
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax' // Better for Railway
    }
 }));
 
@@ -130,7 +136,7 @@ app.post('/auth/register', async (req, res) => {
       }
 
       // Generate username from email (before @ symbol)
-      const username = email.split('@')[0];
+      let username = email.split('@')[0];
 
       // Check if user already exists
       const existingUser = await User.findByEmail(email);
@@ -397,8 +403,13 @@ io.on('connection', async (socket) => {
    });
 });
 
+// Health check endpoint for Railway
+app.get('/health', (req, res) => {
+   res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
    console.log(`🚀 ChatBud Server is running on PORT: ${PORT}`);
    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
    console.log(`🕐 Timezone: ${process.env.DEFAULT_TIMEZONE || 'Asia/Dhaka'}`);
