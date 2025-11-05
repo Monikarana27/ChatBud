@@ -248,7 +248,7 @@ Search messages within a room.
 
 1. **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/xeroxchat.git
+git clone https://github.com/Monikarana27/ChatBud.git
 cd xeroxchat
 ```
 
