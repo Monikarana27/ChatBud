@@ -249,7 +249,7 @@ Search messages within a room.
 1. **Clone the Repository**
 ```bash
 git clone https://github.com/Monikarana27/ChatBud.git
-cd xeroxchat
+cd ChatBud
 ```
 
 2. **Install Dependencies**
@@ -312,7 +312,7 @@ DEFAULT_TIMEZONE=Asia/Dhaka
 ## 📁 Project Structure
 
 ```
-xeroxchat/
+chatBud/
 ├── 📁 config/
 │   └── database.js          # Database connection configuration
 ├── 📁 models/
